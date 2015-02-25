@@ -1,11 +1,3 @@
-#Anuj Menta
-#12MA20007
-
-#Input the arrays A, B, C, D to the TDMASolver function
-#Example: y'' = x+y h = 0.25
-# Obtains the array A = [0, 16, 16], B = [-33, -33, -33], C = [16, 16, 0], D = [0.25, 0.5, 0.75] (Inputs)
-# TDMAsolver(A,B,C,D) --> Gives the result Y = [-0.035, -0.056, -0.05]
-
 import numpy as np
 
 def TDMAsolver(a, b, c, d):
@@ -13,13 +5,13 @@ def TDMAsolver(a, b, c, d):
     TDMA solver, a b c d can be NumPy array type or Python list type.
     refer to http://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm
     '''
+    
     n = len(b)
-    for i in range(n):
-        a[i] = float(a[i])
-        b[i] = float(b[i])
-        c[i] = float(c[i])
-        d[i] = float(d[i])
-
+    x = ['a', 'b','c', 'd']
+    a = (np.array(a)).astype(float)
+    b = (np.array(b)).astype(float)
+    c = (np.array(c)).astype(float)
+    d = (np.array(d)).astype(float)
     #Changed to floats
 
     aa, bb, cc, dd = [0]*n, [0]*n, [0]*n, [0]*n
