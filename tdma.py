@@ -22,7 +22,7 @@ def TDMAsolver(a, b, c, d):
 
     #Changed to floats
 
-    aa, bb, cc, dd = [0]*n, [0]*n, [0]*n, [0]*n
+    aa, bb, cc, dd = np.zeros(n), np.zeros(n), np.zeros(n), np.zeros(n)
 
     #initialized
 
