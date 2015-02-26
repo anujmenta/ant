@@ -1,5 +1,11 @@
 import numpy as np
 
+#Input the matrix arrays a, b, c, d to the TDMAsolver function ( Here a is again an array of numpy matrices.)
+#Example: y''''+ 81y = 81x^2 h = 0.24
+# Solution: [ z1 = [-0.75516624], y1 = [ 0.08216288]],[ z2 = [-1.6098758 ], y2 = [ 0.14072681]]),
+# [ z3 = [-1.91138985], y3 = [ 0.12538318]]
+
+
 def TDMAsolver(a, b, c, d):
     '''
     TDMA solver, a b c d can be NumPy array type or Python list type.
