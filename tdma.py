@@ -7,6 +7,9 @@
 # TDMAsolver(A,B,C,D) --> Gives the result Y = [-0.035, -0.056, -0.05]
 
 import numpy as np
+import matplotlib.pyplot as plt
+from math import exp
+import time
 
 def TDMAsolver(a, b, c, d):
     '''
@@ -26,8 +29,10 @@ def TDMAsolver(a, b, c, d):
 
     #initialized
 
+    #Thomas Algorithm
     cc[0] = c[0]/b[0]
     dd[0] = d[0]/b[0]
+
 
     for j in range(1,n):
         bb[j] = b[j] - a[j]*cc[j-1]
@@ -40,4 +45,65 @@ def TDMAsolver(a, b, c, d):
     for i in range(len(dd)):
         dd[i] = round(dd[i],3)
 
+    #Thomas end (back substitution)
+
     return dd
+
+#Input co-efficients of the equation
+a_inp = raw_input("Enter the coeffiecient of y' : ")
+b_inp = raw_input("Enter the coeffiecient of y : ")
+c_inp = raw_input("Enter the coeffiecient of -1 : ")
+
+#Functions for evalueating the values of co-efficients
+def a(x):
+    return float(eval(a_inp))
+def b(x):
+    return float(eval(b_inp))
+def c(x):
+    return float(eval(c_inp))
+
+#The co-effiecients of the equation in the discretized form
+def A(h, x):
+    return round(((1/h**2)+(a(x))/(2*h)),2)
+def B(h):
+    return round(((b(h))-(2/h**2)),2)
+def C(h, x):
+    return round(((1/h**2)-(a(x))/(2*h)),2)
+
+#Number of iterations?
+n1 = int(raw_input("Start Value of n : "))
+n2 = int(raw_input("End Value of n : "))
+
+#For loop for plotting the graph
+for n_iter in range(n1,n2+1):
+    if n_iter==14:
+        pass
+    h=1/float(n_iter) #standard notation (h)
+
+    A_arr = [A(h, x) for x in np.arange(h,1,h)]
+    #print A_arr, [A(x) for x in np.arange(h,1,h)]
+    B_arr = [B(h)]*(n_iter-1)
+    C_arr = [C(h, x) for x in np.arange(h,1,h)]
+
+    # print A_arr
+    D_arr = [c(round(x,3)) for x in np.arange(h,1,h)]
+    D_arr[-1]+=16
+    if (len(A_arr)!=len(D_arr)):
+        print n_iter
+    D_sol = TDMAsolver(A_arr, B_arr, C_arr, D_arr)
+    h_sol = [round(i,3) for i in np.arange(h,1,h)]
+    try:
+        plt.plot(h_sol,D_sol)
+    except:
+        pass
+    #print n_iter
+    #plt.savefig('figure_loop'+str(n_iter)+'.png', format = 'png')
+    time.sleep(0.1)
+    plt.pause(0.0001)
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.grid(True)
+plt.title("Graphical comparision for the equation y''+("+a_inp+")y'+("+b_inp+")y = "+c_inp+" \nfor n ="+str(n1)+" to n ="+str(n2)+". Here h = (1/n)")
+plt.savefig('graph_tdma.png', format = 'png')
+
