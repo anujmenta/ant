@@ -80,30 +80,35 @@ for n_iter in range(n1,n2+1):
         pass
     h=1/float(n_iter) #standard notation (h)
 
+    #Generating the arrays (Tridiagonal Matrix)
     A_arr = [A(h, x) for x in np.arange(h,1,h)]
-    #print A_arr, [A(x) for x in np.arange(h,1,h)]
     B_arr = [B(h)]*(n_iter-1)
     C_arr = [C(h, x) for x in np.arange(h,1,h)]
-
-    # print A_arr
     D_arr = [c(round(x,3)) for x in np.arange(h,1,h)]
     D_arr[-1]+=16
+
+    #For some cases like n=7, i.e h=1/7 it so happens that number of 
+    #elements goes haphazrd
     if (len(A_arr)!=len(D_arr)):
         print n_iter
+
+    #Solve the Tri-Diagonal Matrix
     D_sol = TDMAsolver(A_arr, B_arr, C_arr, D_arr)
     h_sol = [round(i,3) for i in np.arange(h,1,h)]
+
+    #Plotting the graph
     try:
         plt.plot(h_sol,D_sol)
     except:
         pass
-    #print n_iter
-    #plt.savefig('figure_loop'+str(n_iter)+'.png', format = 'png')
     time.sleep(0.1)
     plt.pause(0.0001)
 
+#Naming the graph and properly labeling it.
 plt.xlabel('x')
 plt.ylabel('y')
 plt.grid(True)
 plt.title("Graphical comparision for the equation y''+("+a_inp+")y'+("+b_inp+")y = "+c_inp+" \nfor n ="+str(n1)+" to n ="+str(n2)+". Here h = (1/n)")
 plt.savefig('graph_tdma.png', format = 'png')
 
+#End of program.
