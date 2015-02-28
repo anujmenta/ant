@@ -35,6 +35,7 @@ def TDMAsolver(a, b, c, d):
 
     return dd
 
+#A simple function to square a number
 def sq(a):
     return a**2
 
@@ -49,3 +50,4 @@ def C(h):
 
 def D(x):
     return np.matrix([[81*sq(x)],[0]])
+
