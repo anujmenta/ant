@@ -54,6 +54,9 @@ a_inp = raw_input("Enter the coeffiecient of y' : ")
 b_inp = raw_input("Enter the coeffiecient of y : ")
 c_inp = raw_input("Enter the coeffiecient of -1 : ")
 
+in_value = raw_input("Enter the value of y(0): ")
+b_value = raw_input("Enter the value of y(1): ")
+
 #Functions for evalueating the values of co-efficients
 def a(x):
     return float(eval(a_inp))
@@ -85,7 +88,11 @@ for n_iter in range(n1,n2+1):
     B_arr = [B(h)]*(n_iter-1)
     C_arr = [C(h, x) for x in np.arange(h,1,h)]
     D_arr = [c(round(x,3)) for x in np.arange(h,1,h)]
-    D_arr[-1]+=16
+    D_arr[0]+= C_arr[0]*(-1.)*(float(in_value))
+    #print C_arr[0]*(-1.)*(float(in_value))
+    D_arr[-1]+= A_arr[0]*(-1.)*(float(b_value))
+    #print A_arr[0]*(-1.)*(float(b_value))
+    #D_arr[-1] += 16
 
     #For some cases like n=7, i.e h=1/7 it so happens that number of 
     #elements goes haphazrd
@@ -109,6 +116,6 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.grid(True)
 plt.title("Graphical comparision for the equation y''+("+a_inp+")y'+("+b_inp+")y = "+c_inp+" \nfor n ="+str(n1)+" to n ="+str(n2)+". Here h = (1/n)")
-plt.savefig('graph_tdma.png', format = 'png')
+plt.savefig('graph_tdma.pdf', format = 'pdf')
 
 #End of program.

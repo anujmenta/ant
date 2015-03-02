@@ -51,3 +51,46 @@ def C(h):
 def D(x):
     return np.matrix([[81*sq(x)],[0]])
 
+#Number of iterations?
+n1 = int(raw_input("Start Value of n : "))
+n2 = int(raw_input("End Value of n : "))
+
+#For loop for plotting the graph
+for n_iter in range(n1,n2+1):
+    if n_iter==14:
+        pass
+    h=1/float(n_iter) #standard notation (h)
+
+    #Generating the arrays (Tridiagonal Matrix)
+    A_arr = [A(h)]*(n_iter-1)
+    B_arr = [B(h)]*(n_iter-1)
+    C_arr = [C(h)]*(n_iter-1)
+    D_arr = [D(round(x,3)) for x in np.arange(h,1,h)]
+    for item in C_arr:
+        print item.shape
+    #For some cases like n=7, i.e h=1/7 it so happens that number of 
+    #elements goes haphazrd
+    if (len(A_arr)!=len(D_arr)):
+        print n_iter
+
+    #Solve the Tri-Diagonal Matrix
+    D_sol = TDMAsolver(A_arr, B_arr, C_arr, D_arr)
+    d_sol = []
+    h_sol = [round(i,3) for i in np.arange(h,1,h)]
+
+#     #Plotting the graph
+#     try:
+#         plt.plot(h_sol,D_sol)
+#     except:
+#         pass
+#     time.sleep(0.1)
+#     plt.pause(0.0001)
+
+# #Naming the graph and properly labeling it.
+# plt.xlabel('x')
+# plt.ylabel('y')
+# plt.grid(True)
+# plt.title("Graphical comparision for the equation y''+("+a_inp+")y'+("+b_inp+")y = "+c_inp+" \nfor n ="+str(n1)+" to n ="+str(n2)+". Here h = (1/n)")
+# plt.savefig('graph_tdma.png', format = 'png')
+
+#End of program.
