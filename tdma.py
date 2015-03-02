@@ -16,7 +16,7 @@ def TDMAsolver(a, b, c, d):
     TDMA solver, a b c d can be NumPy array type or Python list type.
     refer to http://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm
     '''
-    n = len(a)
+    n = len(b)
     for i in range(n):
         a[i] = float(a[i])
         b[i] = float(b[i])
@@ -87,7 +87,7 @@ for n_iter in range(n1,n2+1):
 
     #Generating the arrays (Tridiagonal Matrix)
     A_arr = [A(h, x) for x in np.arange(a1+h,b1,h)]
-    B_arr = [B(h)]*(n_iter-1)
+    B_arr = [B(h)]*(int(((b1-a1)/h)-1))
     C_arr = [C(h, x) for x in np.arange(a1+h,b1,h)]
     D_arr = [c(round(x,3)) for x in np.arange(a1+h,b1,h)]
     D_arr[0]+= C_arr[0]*(-1.)*(float(in_value))
@@ -100,7 +100,6 @@ for n_iter in range(n1,n2+1):
     #elements goes haphazrd
     if (len(A_arr)!=len(D_arr)):
         print n_iter
-    print "B", B_arr
     #Solve the Tri-Diagonal Matrix
     D_sol = TDMAsolver(A_arr, B_arr, C_arr, D_arr)
     h_sol = [round(i,3) for i in np.arange(a1+h, b1, h)]
