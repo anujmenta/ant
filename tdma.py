@@ -16,7 +16,7 @@ def TDMAsolver(a, b, c, d):
     TDMA solver, a b c d can be NumPy array type or Python list type.
     refer to http://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm
     '''
-    n = len(b)
+    n = len(a)
     for i in range(n):
         a[i] = float(a[i])
         b[i] = float(b[i])
@@ -54,16 +54,19 @@ a_inp = raw_input("Enter the coeffiecient of y' : ")
 b_inp = raw_input("Enter the coeffiecient of y : ")
 c_inp = raw_input("Enter the coeffiecient of -1 : ")
 
-in_value = raw_input("Enter the value of y(0): ")
-b_value = raw_input("Enter the value of y(1): ")
+a1, in_value = raw_input("Enter the intial values of x and y in the format x, y(x): ").split()
+b1, b_value = raw_input("Enter the boundary values of x and y in the format x, y(x): ").split()
 
-#Functions for evalueating the values of co-efficients
+a1 = float(a1)
+b1 = float(b1)
+
+#Functions for evaluating the values of co-efficients
 def a(x):
-    return float(eval(a_inp))
+    return float(eval(str(eval(a_inp))))
 def b(x):
-    return float(eval(b_inp))
+    return float(eval(str(eval(b_inp))))
 def c(x):
-    return float(eval(c_inp))
+    return float(eval(str(eval(c_inp))))
 
 #The co-effiecients of the equation in the discretized form
 def A(h, x):
@@ -79,15 +82,14 @@ n2 = int(raw_input("End Value of n : "))
 
 #For loop for plotting the graph
 for n_iter in range(n1,n2+1):
-    if n_iter==14:
-        pass
+
     h=1/float(n_iter) #standard notation (h)
 
     #Generating the arrays (Tridiagonal Matrix)
-    A_arr = [A(h, x) for x in np.arange(h,1,h)]
+    A_arr = [A(h, x) for x in np.arange(a1+h,b1,h)]
     B_arr = [B(h)]*(n_iter-1)
-    C_arr = [C(h, x) for x in np.arange(h,1,h)]
-    D_arr = [c(round(x,3)) for x in np.arange(h,1,h)]
+    C_arr = [C(h, x) for x in np.arange(a1+h,b1,h)]
+    D_arr = [c(round(x,3)) for x in np.arange(a1+h,b1,h)]
     D_arr[0]+= C_arr[0]*(-1.)*(float(in_value))
     #print C_arr[0]*(-1.)*(float(in_value))
     D_arr[-1]+= A_arr[0]*(-1.)*(float(b_value))
@@ -98,10 +100,10 @@ for n_iter in range(n1,n2+1):
     #elements goes haphazrd
     if (len(A_arr)!=len(D_arr)):
         print n_iter
-
+    print "B", B_arr
     #Solve the Tri-Diagonal Matrix
     D_sol = TDMAsolver(A_arr, B_arr, C_arr, D_arr)
-    h_sol = [round(i,3) for i in np.arange(h,1,h)]
+    h_sol = [round(i,3) for i in np.arange(a1+h, b1, h)]
 
     #Plotting the graph
     try:
