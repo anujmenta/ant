@@ -48,9 +48,8 @@ def thomas_algorithm(a, b, c, d):
 
     return f
 
-if __name__ == "__main__":
 
-    coeffs, initial_cond, final_cond = read_BVP(sys.stdin)
+def solve_BVP(coeffs, initial_cond, final_cond):
     A, B, C, D = coeffs
     l, y_l = initial_cond
     r, y_r = final_cond
@@ -77,4 +76,10 @@ if __name__ == "__main__":
     d[N-2] = D - y_r*(A/(h**2) + B/(2*h))
 
     f = [y_l] + thomas_algorithm(a, b, c, d) + [y_r]
+    return f
+
+
+if __name__ == "__main__":
+    coeffs, initial_cond, final_cond = read_BVP(sys.stdin)
+    f = solve_BVP(coeffs, initial_cond, final_cond)
     print(f)
