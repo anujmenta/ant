@@ -3,6 +3,8 @@
 
 # Using Thomas algorithm to solve the linear BVP
 import sys
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def read_BVP(infile):
@@ -15,7 +17,9 @@ def read_BVP(infile):
     coeffs = [int(x) for x in infile.readline()[:-1].split(' ')]
     initial_cond = [int(x) for x in infile.readline()[:-1].split(' ')]
     final_cond = [int(x) for x in infile.readline()[:-1].split(' ')]
-    return (coeffs, initial_cond, final_cond)
+    print("Enter h")
+    h = float(infile.readline()[:-1])
+    return (coeffs, initial_cond, final_cond, h)
 
 
 def thomas_algorithm(a, b, c, d):
@@ -49,12 +53,10 @@ def thomas_algorithm(a, b, c, d):
     return f
 
 
-def solve_BVP(coeffs, initial_cond, final_cond):
+def solve_BVP(coeffs, initial_cond, final_cond, h):
     A, B, C, D = coeffs
     l, y_l = initial_cond
     r, y_r = final_cond
-    print("Enter h")
-    h = float(sys.stdin.readline()[:-1])
 
     N = (r - l)/h
     assert int(N) == N
@@ -80,6 +82,7 @@ def solve_BVP(coeffs, initial_cond, final_cond):
 
 
 if __name__ == "__main__":
-    coeffs, initial_cond, final_cond = read_BVP(sys.stdin)
-    f = solve_BVP(coeffs, initial_cond, final_cond)
+    input_file = open("in", "r")
+    coeffs, initial_cond, final_cond, h = read_BVP(input_file)
+    f = solve_BVP(coeffs, initial_cond, final_cond, h)
     print(f)

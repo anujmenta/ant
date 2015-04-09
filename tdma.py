@@ -41,7 +41,7 @@ def TDMAsolver(a, b, c, d):
 
     for num in range(n-2,-1,-1):
         dd[num] = dd[num] - cc[num]*dd[num+1]
-    
+
     for i in range(len(dd)):
         dd[i] = round(dd[i],3)
 
@@ -96,7 +96,7 @@ for n_iter in range(n1,n2+1):
     #print A_arr[0]*(-1.)*(float(b_value))
     #D_arr[-1] += 16
 
-    #For some cases like n=7, i.e h=1/7 it so happens that number of 
+    #For some cases like n=7, i.e h=1/7 it so happens that number of
     #elements goes haphazrd
     if (len(A_arr)!=len(D_arr)):
         print n_iter
