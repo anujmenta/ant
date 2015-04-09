@@ -11,7 +11,7 @@ def TDMAsolver(a, b, c, d):
     TDMA solver, a b c d can be NumPy array type or Python list type.
     refer to http://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm
     '''
-    
+
     n = len(b)
     #Changed to floats
 
@@ -31,6 +31,6 @@ def TDMAsolver(a, b, c, d):
 
     for num in range(n-2,-1,-1):
         dd[num] = dd[num] - cc[num]*dd[num+1]
-    
+
 
     return dd
