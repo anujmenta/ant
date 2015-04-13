@@ -3,3 +3,4 @@
 * [Cubic Spline](http://nbviewer.ipython.org/github/hargup/ant/blob/master/notebooks/Cubic%20Spline.ipynb)
 * [Newton Raphson](http://nbviewer.ipython.org/github/hargup/ant/blob/master/notebooks/Newton%20Raphson.ipynb)
 * [Crank Nicholson](http://nbviewer.ipython.org/github/hargup/ant/blob/master/notebooks/crank_nicolson.ipynb)
+* [Quasi Linearization](http://nbviewer.ipython.org/github/hargup/ant/blob/master/notebooks/Quasi_linearization.ipynb)
